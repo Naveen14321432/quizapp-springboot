@@ -1,7 +1,5 @@
 package com.example.quiz.model;
 
-import com.example.quiz.model.role.Role;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
