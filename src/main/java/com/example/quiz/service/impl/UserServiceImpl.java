@@ -14,7 +14,7 @@ import com.example.quiz.service.UserService;
 public class UserServiceImpl implements UserService{
 	
 	private final UserRepository userRepository;
-	
+	//Constuctor-based DI
 	public UserServiceImpl(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
