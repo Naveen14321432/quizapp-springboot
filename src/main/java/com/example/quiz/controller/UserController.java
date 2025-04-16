@@ -22,7 +22,7 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-    @GetMapping
+    @GetMapping("/allusers")
     public ResponseEntity<List<UserDto>> getAllUsers() {
         List<UserDto> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
@@ -39,7 +39,7 @@ public class UserController {
     }
 
     // Create new user
-    @PostMapping
+    @PostMapping("/addUser")
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
         UserDto createdUser = userService.createUser(userDto);
         return ResponseEntity.ok(createdUser);

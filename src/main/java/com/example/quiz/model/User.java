@@ -79,5 +79,10 @@ public class User {
 		this.name = name;
 		this.role = role;
 	}
+
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 }
 

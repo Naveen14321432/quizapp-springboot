@@ -1,12 +1,14 @@
 package com.example.quiz.dto;
 
 import com.example.quiz.model.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class UserDto {
 	private Long id;
 	private String username;
 	private String email;
 	private String name;
+	private String password;
 	private Role role;
 	
 	public Long getId() {
@@ -40,14 +42,21 @@ public class UserDto {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
-	public UserDto(Long id, String username, String email, String name, Role role) {
+	@JsonIgnore
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public UserDto(Long id, String username, String email, String name, Role role, String password) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.name = name;
 		this.role = role;
+		this.password = password;
 	}
 	
 	public UserDto() {

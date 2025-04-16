@@ -41,10 +41,10 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	private UserDto convertToDto(User user) {
-		return new UserDto(user.getId(), user.getUsername(), user.getEmail(), user.getName(), user.getRole());
+		return new UserDto(user.getId(), user.getUsername(), user.getEmail(), user.getName(), user.getRole(), user.getPassword());
 	}
 	
 	private User convertToEntity(UserDto userDto) {
-		return new User(userDto.getId(), userDto.getUsername(), null, userDto.getEmail(), userDto.getName(), userDto.getRole());
+		return new User(userDto.getId(), userDto.getUsername(), userDto.getPassword(), userDto.getEmail(), userDto.getName(), userDto.getRole());
 	}
 }
