@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.quiz.dto.QuestionDto;
@@ -20,19 +22,48 @@ public class QuestionServiceImpl implements QuestionService{
 		this.questionRepository = questionRepository;
 	}
 	
-	@Override
-	public List<QuestionDto> getAllQuestions(){
-		return questionRepository.findAll()
-				.stream()
-				.map(this::convertToDto)
-				.collect(Collectors.toList());
+	public List<QuestionDto> getAllQuestions() {
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	   // System.out.println("Authorities: " + auth.getAuthorities());
+
+	    boolean isAdmin = auth.getAuthorities().stream()
+	                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+	    return questionRepository.findAll().stream()
+	            .map(q -> {
+	                QuestionDto dto = convertToDto(q);
+	                if (!isAdmin) {
+	                    dto.setCorrectAnswer(null); // hide answer for USER
+	                }
+	                return dto;
+	            }).collect(Collectors.toList());
 	}
+
 	
 	@Override
 	public QuestionDto getQuestionById(Long id) {
-		Optional<Question> q = questionRepository.findById(id);
-		return q.map(this::convertToDto).orElse(null);
+	    Optional<Question> q = questionRepository.findById(id);
+
+	    if (q.isPresent()) {
+	        QuestionDto dto = convertToDto(q.get());
+
+	        // Get current authentication
+	        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+	        // Check if the user is not admin, then hide correct answer
+	        boolean isAdmin = auth.getAuthorities().stream()
+	                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+	        if (!isAdmin) {
+	            dto.setCorrectAnswer(null);
+	        }
+
+	        return dto;
+	    }
+
+	    return null;
 	}
+
 	
 	
 	@Override

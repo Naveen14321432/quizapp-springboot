@@ -1,7 +1,7 @@
 package com.example.quiz.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
+//import com.fasterxml.jackson.annotation.JsonProperty;
+//import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 public class QuestionDto {
 	
@@ -50,7 +50,7 @@ public class QuestionDto {
 		this.optionD = optionD;
 	}
 	
-	@JsonProperty(access = Access.WRITE_ONLY)
+//	@JsonProperty(access = Access.WRITE_ONLY)
 	public String getCorrectAnswer() {
 		return correctAnswer;
 	}

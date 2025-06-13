@@ -1,7 +1,8 @@
 package com.example.quiz.dto;
 
 import com.example.quiz.model.Role;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 public class UserDto {
 	private Long id;
@@ -42,7 +43,7 @@ public class UserDto {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	@JsonIgnore
+	@JsonProperty(access = Access.WRITE_ONLY)
 	public String getPassword() {
 		return password;
 	}

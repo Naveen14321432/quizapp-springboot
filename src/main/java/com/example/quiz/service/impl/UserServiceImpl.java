@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.example.quiz.dto.UserDto;
+import com.example.quiz.model.Role;
 import com.example.quiz.model.User;
 import com.example.quiz.repositories.UserRepository;
 import com.example.quiz.service.UserService;
@@ -45,6 +46,6 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	private User convertToEntity(UserDto userDto) {
-		return new User(userDto.getId(), userDto.getUsername(), userDto.getPassword(), userDto.getEmail(), userDto.getName(), userDto.getRole());
+		return new User(userDto.getId(), userDto.getUsername(), userDto.getPassword(), userDto.getEmail(), userDto.getName(), userDto.getRole() != null ? userDto.getRole() : Role.USER);
 	}
 }
