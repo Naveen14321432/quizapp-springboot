@@ -1,5 +1,8 @@
 package com.example.quiz.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 public class QuestionDto {
 	
 	private Long id;
@@ -8,6 +11,7 @@ public class QuestionDto {
 	private String optionB;
 	private String optionC;
 	private String optionD;
+	private String correctAnswer;
 	
 	public Long getId() {
 		return id;
@@ -46,7 +50,15 @@ public class QuestionDto {
 		this.optionD = optionD;
 	}
 	
-	public QuestionDto(Long id, String question, String optionA, String optionB, String optionC, String optionD) {
+	@JsonProperty(access = Access.WRITE_ONLY)
+	public String getCorrectAnswer() {
+		return correctAnswer;
+	}
+	public void setCorrectAnswer(String correctAnswer) {
+		this.correctAnswer = correctAnswer;
+	}
+	
+	public QuestionDto(Long id, String question, String optionA, String optionB, String optionC, String optionD, String correctAnswer) {
 		super();
 		this.id = id;
 		this.question = question;
@@ -54,6 +66,7 @@ public class QuestionDto {
 		this.optionB = optionB;
 		this.optionC = optionC;
 		this.optionD = optionD;
+		this.correctAnswer = correctAnswer;
 	}
 	
 	public QuestionDto() {

@@ -45,11 +45,11 @@ public class QuestionServiceImpl implements QuestionService{
 	
 	
 	public QuestionDto convertToDto(Question question) {
-		return new QuestionDto(question.getId(), question.getQuestion(), question.getOptionA(), question.getOptionB(), question.getOptionC(), question.getOptionD());
+		return new QuestionDto(question.getId(), question.getQuestion(), question.getOptionA(), question.getOptionB(), question.getOptionC(), question.getOptionD(), question.getCorrectAnswer());
 	}
 	
 	public Question convertToEntity(QuestionDto questionDto) {
-		return new Question(questionDto.getId(), questionDto.getQuestion(), questionDto.getOptionA(), questionDto.getOptionB(), questionDto.getOptionC(), questionDto.getOptionD(), null);
+		return new Question(questionDto.getId(), questionDto.getQuestion(), questionDto.getOptionA(), questionDto.getOptionB(), questionDto.getOptionC(), questionDto.getOptionD(), questionDto.getCorrectAnswer());
 	}
 
 }
