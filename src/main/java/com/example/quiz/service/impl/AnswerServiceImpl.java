@@ -8,6 +8,10 @@ import com.example.quiz.repositories.AnswerRepository;
 import com.example.quiz.repositories.QuestionRepository;
 import com.example.quiz.repositories.UserRepository;
 import com.example.quiz.service.AnswerService;
+
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -81,7 +85,14 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
+    @Transactional
     public void deleteAnswer(Long answerId) {
+    	if (answerId == null) {
+            throw new IllegalArgumentException("Answer ID cannot be null");
+        }
+    	if (!answerRepository.existsById(answerId)) {
+            throw new EntityNotFoundException("Answer with ID " + answerId + " not found");
+        }
         answerRepository.deleteById(answerId);
     }
 }

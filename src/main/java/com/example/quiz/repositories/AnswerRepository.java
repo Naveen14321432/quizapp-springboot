@@ -11,7 +11,7 @@ import com.example.quiz.model.Answer;
 public interface AnswerRepository extends JpaRepository<Answer, Long> {
 
 	List<Answer> findByQuestions_Id(Long id);
-
+	void deleteByQuestions_Id(Long questionId);
 	List<Answer> findByUserId(Long userId);
 
 }

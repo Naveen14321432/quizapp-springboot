@@ -9,4 +9,6 @@ public interface QuestionService {
 	List<QuestionDto> getAllQuestions();
 	QuestionDto getQuestionById(Long id);
 	QuestionDto createQuestion(QuestionDto question);
+	QuestionDto updateQuestion(QuestionDto question);
+	void deleteQuestion(Long id);
 }
