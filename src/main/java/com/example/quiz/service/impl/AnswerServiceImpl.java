@@ -33,12 +33,23 @@ public class AnswerServiceImpl implements AnswerService {
         
         Question question = questionRepository.findById(answerDto.getQuestionId())
                 .orElseThrow(() -> new RuntimeException("Question not found"));
+        
+     // Convert selected option code (A/B/C/D) to actual text
+        String selectedText = switch (answerDto.getSelectedOption()) {
+            case "A" -> question.getOptionA();
+            case "B" -> question.getOptionB();
+            case "C" -> question.getOptionC();
+            case "D" -> question.getOptionD();
+            default -> null;
+        };
+        
+        boolean isCorrect = question.getCorrectAnswer().equalsIgnoreCase(selectedText);
 
         Answer answer = new Answer();
         answer.setUser(user);
         answer.setQuestions(question);
         answer.setSelectedOption(answerDto.getSelectedOption());
-        answer.setCorrect(answerDto.isCorrect());
+        answer.setCorrect(isCorrect);
 
         Answer savedAnswer = answerRepository.save(answer);
 
