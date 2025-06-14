@@ -41,6 +41,11 @@ public class UserServiceImpl implements UserService{
 		return convertToDto(savedUser);
 	}
 	
+	@Override
+	public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
+	
 	private UserDto convertToDto(User user) {
 		return new UserDto(user.getId(), user.getUsername(), user.getEmail(), user.getName(), user.getRole(), user.getPassword());
 	}
